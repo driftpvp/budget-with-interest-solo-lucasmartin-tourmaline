@@ -11,7 +11,7 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Budget With Interest!</h2>
+        <h2 className="nav-title"></h2>
       </Link>
       <div>
       <Footer />
@@ -35,6 +35,18 @@ function Nav() {
 
             <Link className="navLink" to="/info">
               Info Page
+            </Link>
+
+            <Link className="navLink" to="/assets">
+              Assets
+            </Link>
+
+            <Link className="navLink" to="/liabilities">
+              Liabilities
+            </Link>
+
+            <Link className="navLink" to="/favorites">
+              Favorites
             </Link>
 
             <LogOutButton className="navLink" />

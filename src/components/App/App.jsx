@@ -9,7 +9,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
@@ -20,6 +19,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Header from '../Header/Header';
+import Assets from '../Assets/Assets';
+import Liabilities from '../Liabilities/Liabilities';
+import Favorites from '../Favorites/Favorites';
 
 import './App.css';
 
@@ -110,6 +112,30 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+          <ProtectedRoute
+            // logged in shows Assets page
+            exact
+            path="/assets"
+          >
+            <Assets />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Assets page
+            exact
+            path="/liabilities"
+          >
+            <Liabilities />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Assets page
+            exact
+            path="/favorites"
+          >
+            <Favorites />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
