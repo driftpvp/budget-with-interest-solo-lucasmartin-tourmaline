@@ -15,7 +15,7 @@ function Liabilities() {
   const [liabilitiesList, setLiabilitiesList] = useState([]);
   const [liablilitiesName, setLiabilitiesName] = useState ('');
   const [liabilitiesNote, setLiabilitiesNote] = useState ('');
-  const [liabilitiesValue, setLiabilitiesValue] = useState (number);
+  const [liabilitiesValue, setLiabilitiesValue] = useState (0);
 
   useEffect(() => {
     fetchLiabilities();
@@ -33,6 +33,16 @@ function Liabilities() {
   return (
     <div>
       <h2>Welcome to Liabilities</h2>
+      <div>
+        {
+          liabilitiesList.map(liabilities => (
+            <div key={liabilities.id} style={{padding: '10px', margin: '10px', borderRadius: '10px', boarder: '2px solid gray' }}>
+              <h4>{liabilities.liabilities_name} per month ${liabilities.liabilities_value}</h4>
+              <p> {liabilities.liabilities_note} </p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }
