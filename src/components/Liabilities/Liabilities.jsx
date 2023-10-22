@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import './Liabilities.css';
 
 // Basic functional component structure for React with default state
@@ -9,26 +9,32 @@ import './Liabilities.css';
 function Liabilities() {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+  const dispatch = useDispatch;
+  const liabilitiesList = useSelector((store) => store.liabilitiesList)
+  // const store = useSelector((store) => store);
+  // const [liabilities_name, setLiabilitiesName] = useState('');
 
-  const [liabilitiesList, setLiabilitiesList] = useState([]);
-  const [liablilitiesName, setLiabilitiesName] = useState ('');
-  const [liabilitiesNote, setLiabilitiesNote] = useState ('');
-  const [liabilitiesValue, setLiabilitiesValue] = useState (0);
+  // const [liabilitiesList, setLiabilitiesList] = useState([]);
+  // const [liablilitiesName, setLiabilitiesName] = useState ('');
+  // const [liabilities_note, setLiabilitiesNote] = useState ('');
+  // const [liabilities_value, setLiabilitiesValue] = useState (0);
 
   useEffect(() => {
-    fetchLiabilities();
+    getLiabilitiesList();
   }, []);
 
-  const fetchLiabilities = () => {
-    axios.get('/api/liabilities').then((response) => {
-        setLiabilitiesList(response.data);
-    }).catch((error) => {
-        console.log(error);
-        alert('Something went wrong with Liabilities GET');
-    });
-  }
+  const getLiabilitiesList = () => {
+    dispatch({ type: 'FETCH_LIABILITIES_LIST' })
+  };
+
+  // const fetchLiabilities = () => {
+  //   axios.get('/api/liabilities').then((response) => {
+  //       setLiabilitiesList(response.data);
+  //   }).catch((error) => {
+  //       console.log(error);
+  //       alert('Something went wrong with Liabilities GET');
+  //   });
+  // }
 
   return (
     <div>

@@ -7,4 +7,4 @@ const liabilitiesList = (state = [], action) => {
     }
 };
 
-export default liabilitiesList
+export default liabilitiesList;
