@@ -16,8 +16,9 @@ function Assets() {
 
   const [assetsList, setAssetsList] = useState([]);
   const [assetsName, setAssetsName] = useState ('');
-  // const [assets_note, setAssetsNote] = useState ('');
+  const [assetsNote, setAssetsNote] = useState ('');
   const [assetsValue, setAssetsValue] = useState (0);
+  const [userId, setUserId] = useState (0);
 
   useEffect(() => {
     getAssetsList();
@@ -36,6 +37,16 @@ function Assets() {
     });
   }
 
+  const addAsset = (event) => {
+    event.preventDefault();
+    axios.post('api/assets', { assets_name: assetsName, assets_note : assetsNote, assets_value : assetsValue, user_id: userId})
+    .then(response => getAssetsList())
+    .catch(error => {
+      console.log(error);
+      alert('Something went wrong with Assets POST');
+    });
+  }
+
   return (
     <div>
       <h2>Welcome to Assets</h2>
@@ -49,6 +60,16 @@ function Assets() {
           ))
         }
       </div>
+      <br></br>
+      <br></br>
+      <h2>New Entry</h2>
+      <form onSubmit={addAsset}>
+        Name: <input type="text" value={assetsName} onChange={e => setAssetsName(e.target.value)} />
+        Note: <input type="text" value={assetsNote} onChange={e => setAssetsNote(e.target.value)} />
+        Value: <input type="text" value={assetsValue} onChange={e => setAssetsValue(e.target.value)} />
+        <br />
+        <button>Submit</button>
+      </form>
     </div>
   );
 }
