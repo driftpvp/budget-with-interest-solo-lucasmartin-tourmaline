@@ -47,6 +47,17 @@ function Assets() {
     });
   }
 
+  const deleteAssets = (assetId) => {
+    axios.delete(`/api/assets/${assetId}`)
+    .then((response) => {
+      getAssetsList();
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Something went wrong while deleting the entry");
+    });
+  }
+
   return (
     <div>
       <h2>Welcome to Assets</h2>
@@ -56,6 +67,7 @@ function Assets() {
             <div key={assets.id} style={{padding: '10px', margin: '10px', borderRadius: '10px', boarder: '2px solid gray' }}>
               <h4>{assets.assets_name} per month ${assets.assets_value}</h4>
               <p> {assets.assets_note} </p>
+              <button onClick={() => deleteAssets(assets.id)} style={{ cursor: "pointer" }}>Delete</button>
             </div>
           ))
         }

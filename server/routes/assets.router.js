@@ -45,8 +45,24 @@ router.post('/', (req, res) => {
   } else {
     res.sendStatus(401);
   };
+});
 
-
+// DELETE route code here
+router.delete('/:id', (req, res) => {
+    if(req.isAuthenticated()) {
+        let id = req.params.id;
+        let queryText = 'DELETE FROM "assets" WHERE id=$1;';
+        pool.query(queryText, [id])
+        .then((result) => {
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('error DELETE /api/assets', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(401);
+    }
 });
 
 module.exports = router;
