@@ -12,12 +12,12 @@ function Liabilities() {
   const dispatch = useDispatch;
   const liabilitiesList = useSelector((store) => store.liabilitiesList)
   // const store = useSelector((store) => store);
-  // const [liabilities_name, setLiabilitiesName] = useState('');
+  const [liabilities_name, setLiabilitiesName] = useState('');
 
   // const [liabilitiesList, setLiabilitiesList] = useState([]);
   // const [liablilitiesName, setLiabilitiesName] = useState ('');
-  // const [liabilities_note, setLiabilitiesNote] = useState ('');
-  // const [liabilities_value, setLiabilitiesValue] = useState (0);
+  const [liabilities_note, setLiabilitiesNote] = useState ('');
+  const [liabilities_value, setLiabilitiesValue] = useState (0);
 
   useEffect(() => {
     getLiabilitiesList();
