@@ -49,6 +49,29 @@ function Favorites() {
     });
   }
 
+  const sendToAssets = (event) => {
+    // event.preventDefault();
+    axios.post('api/assets', { assets_name: favoritesName, assets_note: favoritesNote, assets_value: favoritesValue})
+    .then(response => getAssetsList())
+    .catch(error => {
+      console.log(error);
+      alert('Something went wrong with send to assets');
+    });
+  }
+
+  const editFavorites = (favoriteEdit) => {
+    axios.put(`api/favorites/${favoriteEdit}`)
+    // , { favorites_value: favoritesValue })
+    .then(response => {
+      console.log(response);
+      getFavoritesList()
+    })
+    .catch(error => {
+      console.log(error);
+      alert('Something went wrong with Favorites PUT');
+    });
+  }
+
   const deleteFavorites = (favoriteId) => {
     axios.delete(`/api/favorites/${favoriteId}`)
     .then((response) => {
@@ -60,13 +83,13 @@ function Favorites() {
     });
   }
 
-  const sumFavorites = () => {
-    let total = 0;
-    for(let i = 0; i < favoritesList.length; i +=1) {
-      total += Number(favoritesList[i].favorites_value);
-    }
-    return total;
-  }
+  // const sumFavorites = () => {
+  //   let total = 0;
+  //   for(let i = 0; i < favoritesList.length; i +=1) {
+  //     total += Number(favoritesList[i].favorites_value);
+  //   }
+  //   return total;
+  // }
 
   return (
     <div>
@@ -75,9 +98,14 @@ function Favorites() {
         {
           favoritesList.map(favorites => (
             <div key={favorites.id} style={{padding: '10px', margin: '10px', borderRadius: '10px', boarder: '2px solid gray' }}>
-              <h4>{favorites.favorites_name} per month ${favorites.favorites_value}</h4>
+              <h4>{favorites.favorites_name}  ${favorites.favorites_value}
+                <input type="text" placeholder='edit amount' onChange={e => setFavoritesValue(e.target.value)} />
+              <button onClick={() => editFavorites(favorites.value)} style={{ cursor: "pointer" }}>Edit</button>
+              </h4>
               <p> {favorites.favorites_note} </p>
               <button onClick={() => deleteFavorites(favorites.id)} style={{ cursor: "pointer" }}>Delete</button>
+              <button onClick={() => sendToAssets(favorites.id)} style={{ cursor: "pointer "}}>Send to Assets</button>
+              <button >Send to Liabilities</button>
             </div>
           ))
         }
@@ -91,10 +119,11 @@ function Favorites() {
         Value: <input type="text" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />
         <br />
         <button>Submit</button>
+   
       </form>
       <br />
       <br />
-      <h2>Monthly Total: ${sumFavorites()}</h2>
+      {/* <h2>Monthly Total: ${sumFavorites()}</h2> */}
     </div>
   );
 }

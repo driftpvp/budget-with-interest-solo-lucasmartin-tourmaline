@@ -47,6 +47,25 @@ router.post('/', (req, res) => {
   };
 });
 
+router.put('/edit/:id', (req, res) => {
+  let { favorites_value } = req.params
+  if(req.isAuthenticated()) {
+    console.log('user', req.user);
+    let queryText = `UPDATE "favorites" SET "favorites_value" = ${favoritesValue} WHERE "user_id" = $1;`;
+    pool.query(sqlText, [favorites_value])
+    // pool.query(queryText, [req.body.favorites_value])
+    .then(result => {
+        res.sendStatus(201);
+    })
+    .catch(error => {
+        console.log(error);
+        res.sendStatus(500)
+    })
+  } else {
+    res.sendStatus(401);
+  };
+});
+
 // DELETE route code here
 router.delete('/:id', (req, res) => {
     if(req.isAuthenticated()) {
