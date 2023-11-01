@@ -84,4 +84,23 @@ router.delete('/:id', (req, res) => {
     }
 });
 
+// router.put('/toggle/:id', (req, res) => {
+//   let { id } = req.params
+//   if(req.isAuthenticated()) {
+//     console.log('user', req.user);
+//     const sqlText = `UPDATE "favorites" SET "favorites_value" = ${favoritesValue} WHERE "user_id" = $1;`;
+//     pool.query(sqlText, [id])
+//     // pool.query(queryText, [req.body.favorites_value])
+//     .then(result => {
+//         res.sendStatus(201);
+//     })
+//     .catch(error => {
+//         console.log(error);
+//         res.sendStatus(500)
+//     })
+//   } else {
+//     res.sendStatus(401);
+//   };
+// });
+
 module.exports = router;

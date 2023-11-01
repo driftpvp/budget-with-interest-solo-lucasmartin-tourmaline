@@ -9,7 +9,7 @@ import './Liabilities.css';
 function Liabilities() {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const liabilitiesList = useSelector((store) => store.liabilitiesList)
   // const store = useSelector((store) => store);
   const [liabilities_name, setLiabilitiesName] = useState('');
@@ -24,7 +24,7 @@ function Liabilities() {
   }, []);
 
   const getLiabilitiesList = () => {
-    dispatch({ type: 'FETCH_LIABILITIES_LIST' })
+    dispatch({ type: 'FETCH_LIABILITIES' })
   };
 
   // const fetchLiabilities = () => {
@@ -42,7 +42,7 @@ function Liabilities() {
       <div>
         {
           liabilitiesList.map(liabilities => (
-            <div key={liabilities.id} style={{padding: '10px', margin: '10px', borderRadius: '10px', boarder: '2px solid gray' }}>
+            <div key={liabilities.id} style={{padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
               <h4>{liabilities.liabilities_name} per month ${liabilities.liabilities_value}</h4>
               <p> {liabilities.liabilities_note} </p>
             </div>
