@@ -1,11 +1,12 @@
+
 import axios from "axios";
 import { put, takeLatest } from 'redux-saga/effects';
 
 //GET
 function* getLiabilitiesList() {
     try {
-        let response = yield axios.get('/api/liabilities');
-        yield put({ type: 'SET_LIABILITIES_LIST', payload: response.data});
+        const liabilitiesResponse = yield axios.get('/api/liabilities');
+        yield put({ type: 'SET_LIABILITIES', payload: liabilitiesResponse.data});
     } catch (error) {
         console.log('ERROR in getLiabilitiesList', error);
         alert('Something went wrong!');
@@ -21,7 +22,7 @@ function* getLiabilitiesList() {
 //DELETE
 
 function* liabilitiesSaga() {
-    yield takeLatest('FETCH_LIABILITIES_LIST', getLiabilitiesList);
+    yield takeLatest('FETCH_LIABILITIES', getLiabilitiesList);
 }
 
 export default liabilitiesSaga;

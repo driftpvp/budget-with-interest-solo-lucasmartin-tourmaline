@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import Assets from '../Assets/Assets';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -7,7 +8,9 @@ import './Header.css';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 function Header() {
-  return <header>Budget With Interest!</header>;
+  return <header className="header">
+            <h1 className="header-title">Budget With Interest!  {}</h1>
+         </header>;
 }
 
 export default Header;

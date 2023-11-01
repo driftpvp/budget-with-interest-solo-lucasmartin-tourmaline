@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import './Assets.css';
 
+
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
@@ -19,6 +20,7 @@ function Assets() {
   const [assetsNote, setAssetsNote] = useState ('');
   const [assetsValue, setAssetsValue] = useState (0);
   const [userId, setUserId] = useState (0);
+  
 
   useEffect(() => {
     getAssetsList();
@@ -58,6 +60,14 @@ function Assets() {
     });
   }
 
+  const sumAssets = () => {
+    let total = 0;
+    for(let i = 0; i < assetsList.length; i +=1) {
+      total += Number(assetsList[i].assets_value);
+    }
+    return total;
+  }
+
   return (
     <div>
       <h2>Welcome to Assets</h2>
@@ -82,6 +92,9 @@ function Assets() {
         <br />
         <button>Submit</button>
       </form>
+      <br />
+      <br />
+      <h2>Monthly Total: ${sumAssets()}</h2>
     </div>
   );
 }
