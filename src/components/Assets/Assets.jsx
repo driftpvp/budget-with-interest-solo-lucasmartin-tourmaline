@@ -41,14 +41,26 @@ function Assets() {
 
   const addAsset = (event) => {
     event.preventDefault();
-    axios.post('api/assets', { assets_name: assetsName, assets_note : assetsNote, assets_value : assetsValue, user_id: userId})
-    .then(response => getAssetsList())
-    .catch(error => {
-      console.log(error);
-      alert('Something went wrong with Assets POST');
-    });
-  }
 
+    // Validate inputs
+    if (assetsName.trim() === '' || assetsValue.trim() === '') {
+      alert('Name and Value must not be empty.');
+      return;
+    }
+
+    axios.post('api/assets', { assets_name: assetsName, assets_note: assetsNote, assets_value: assetsValue, user_id: userId })
+      .then(response => {
+        getAssetsList();
+        // Reset input fields
+        setAssetsName('');
+        setAssetsNote('');
+        setAssetsValue('');
+      })
+      .catch(error => {
+        console.log(error);
+        alert('Something went wrong with Assets POST');
+      });
+  }
   const deleteAssets = (assetId) => {
     axios.delete(`/api/assets/${assetId}`)
     .then((response) => {
@@ -86,9 +98,9 @@ function Assets() {
       <br></br>
       <h2>New Entry</h2>
       <form onSubmit={addAsset}>
-        Name: <input type="text" value={assetsName} onChange={e => setAssetsName(e.target.value)} />
+        Name: <input type="text" placeholder="*" value={assetsName} onChange={e => setAssetsName(e.target.value)} />
         Note: <input type="text" value={assetsNote} onChange={e => setAssetsNote(e.target.value)} />
-        Value: <input type="text" value={assetsValue} onChange={e => setAssetsValue(e.target.value)} />
+        Value: $<input type="text" placeholder="*" value={assetsValue} onChange={e => setAssetsValue(e.target.value)} />
         <br />
         <button>Submit</button>
       </form>

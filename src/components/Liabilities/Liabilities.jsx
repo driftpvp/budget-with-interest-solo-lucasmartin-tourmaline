@@ -90,7 +90,7 @@ function Liabilities() {
       <form onSubmit={addLiabilities}>
         Name: <input type="text" value={liabilitiesName} onChange={e => setLiabilitiesName(e.target.value)} />
         Note: <input type="text" value={liabilitiesNote} onChange={e => setLiabilitiesNote(e.target.value)} />
-        Value: <input type="text" value={liabilitiesValue} onChange={e => setLiabilitiesValue(e.target.value)} />
+        Value: $<input type="text" value={liabilitiesValue} onChange={e => setLiabilitiesValue(e.target.value)} />
         Required: <input type="text" value={liabilitiesRequired} onChange={e => setLiabilitiesRequired(e.target.value)} />
         <br />
         <button>Submit</button>

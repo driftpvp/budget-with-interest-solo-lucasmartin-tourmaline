@@ -116,7 +116,7 @@ function Favorites() {
       <form onSubmit={addFavorites}>
         Name: <input type="text" value={favoritesName} onChange={e => setFavoritesName(e.target.value)} />
         Note: <input type="text" value={favoritesNote} onChange={e => setFavoritesNote(e.target.value)} />
-        Value: <input type="text" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />
+        Value: $<input type="text" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />
         <br />
         <button>Submit</button>
    
