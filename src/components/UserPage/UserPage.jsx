@@ -1,43 +1,53 @@
-import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const [purchasePrice, setPurchasePrice] = useState(''); // State to store the input value
+  const [futureValue, setFutureValue] = useState(null);
 
   const interestCalculator = () => {
-    let amount;
-    let rate = .10;
-    let principal = 100
+    const rate = 0.10; // 10% annual interest rate
+    const principal = parseFloat(purchasePrice); // Convert input to a number
 
-    for (let year = 1; year <= 10; year ++) {
-      amount = principal * Math.pow(1 + rate, year);
-      console.log(year, amount);
+    if (isNaN(principal)) {
+      // Handle invalid input
+      alert('Please enter a valid purchase price.');
+      return;
     }
 
-    
+    let amount = principal;
+
+    for (let year = 1; year <= 10; year++) {
+      amount = amount * (1 + rate);
+    }
+
+    setFutureValue(amount);
   }
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
       <div>
-        <p>The average "ROI" Return on Investment in the stockmarket 
+        <p>The average "ROI" Return on Investment in the stock market 
            over the last century is about 10%. How much would that purchase
            be worth if you invested it instead?
         </p>
-        <form onSubmit = {interestCalculator}>
-        Purchase Price: <input type="text" value onChange={e => (e.target.value)} />
-        <br />
-        <button>Submit</button>
-   
-      </form>
+        <form onSubmit={interestCalculator}>
+          Purchase Price: $<input
+            type="text"
+            value={purchasePrice}
+            onChange={(e) => setPurchasePrice(e.target.value)}
+          />
+          <br />
+          <button type="submit">Calculate</button>
+        </form>
+        {futureValue !== null && (
+          <p>Future Value After Ten Years: ${futureValue.toFixed(2)}</p>
+        )}
       </div>
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;
