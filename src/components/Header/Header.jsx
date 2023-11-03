@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Header.css';
-import Assets from '../Assets/Assets';
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
 
 function Header() {
-  return <header className="header">
-            <h1 className="header-title">Budget With Interest!  {}</h1>
-         </header>;
+  const [totalBalance, setTotalBalance] = useState(0);
+
+  useEffect(() => {
+    getTotalSum();
+  }, []);
+
+  const getTotalSum = () => {
+    axios.get('/api/assets')
+      .then((response) => {
+        const totalBalance = response.data[0].net_worth;
+        setTotalBalance(totalBalance);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Something went wrong with Header GET');
+      });
+  }
+
+  console.log("total", totalBalance);
+
+  return (
+    <header className="header">
+      <h1 className="header-title">Budget With Interest!</h1>
+      <div className="balance-container" style={{ textAlign: 'center' }}>
+        <h1>Total Balance: ${totalBalance}</h1>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
