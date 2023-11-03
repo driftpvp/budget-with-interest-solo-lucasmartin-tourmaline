@@ -41,8 +41,20 @@ function Favorites() {
 
   const addFavorites = (event) => {
     event.preventDefault();
+
+    // Validate inputs
+    if (favoritesName.trim() === '' || favoritesValue.trim() === '') {
+      alert('Name and Value must not be empty.');
+      return;
+    }
+
     axios.post('api/favorites', { favorites_name: favoritesName, favorites_note : favoritesNote, favorites_value : favoritesValue, user_id: userId})
-    .then(response => getFavoritesList())
+    .then(response => {getFavoritesList()
+      // Reset input fields
+      setFavoritesName('');
+      setFavoritesNote('');
+      setFavoritesValue('');
+    })
     .catch(error => {
       console.log(error);
       alert('Something went wrong with Favorites POST');
@@ -114,10 +126,11 @@ function Favorites() {
       <br></br>
       <h2>New Entry</h2>
       <form onSubmit={addFavorites}>
-        Name: <input type="text" value={favoritesName} onChange={e => setFavoritesName(e.target.value)} />
+        *Name: <input type="text" placeholder="*" value={favoritesName} onChange={e => setFavoritesName(e.target.value)} />
         Note: <input type="text" value={favoritesNote} onChange={e => setFavoritesNote(e.target.value)} />
-        Value: $<input type="text" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />
+        *Value: $<input type="text" placeholder="*" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />
         <br />
+        <h6>* is required field</h6>
         <button>Submit</button>
    
       </form>
