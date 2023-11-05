@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Liabilities() {
   const dispatch = useDispatch();
-  const liabilitiesList = useSelector((store) => store.liabilitiesList);
+  const liabilitiesList = useSelector((store) => store.liabilities.liabilitiesList);
   const [liabilitiesName, setLiabilitiesName] = useState('');
   const [liabilitiesNote, setLiabilitiesNote] = useState('');
   const [liabilitiesValue, setLiabilitiesValue] = useState(0);
@@ -16,9 +16,11 @@ function Liabilities() {
     getLiabilitiesList();
   }, []);
 
+  
   const getLiabilitiesList = () => {
     dispatch({ type: 'FETCH_LIABILITIES' });
   };
+
 
   const addLiabilities = (event) => {
     event.preventDefault();
@@ -44,6 +46,7 @@ function Liabilities() {
       });
   }
 
+
   const deleteLiabilities = (liabilitiesId) => {
     axios.delete(`/api/liabilities/${liabilitiesId}`)
       .then((response) => {
@@ -54,6 +57,7 @@ function Liabilities() {
         alert('Something went wrong while deleting the entry');
       });
   }
+
 
   const toggleLiabilities = (id) => {
     axios.put(`/api/liabilities/toggle/${id}`)
@@ -67,13 +71,25 @@ function Liabilities() {
       });
   }
 
+
   const sumLiabilities = () => {
     let total = 0;
     for (let i = 0; i < liabilitiesList.length; i += 1) {
       total += Number(liabilitiesList[i].liabilities_value);
     }
+    dispatch(updateSumLiabilities(total));
+
     return total;
   }
+
+
+  const updateSumLiabilities = (sum) => {
+    return {
+      type: 'UPDATE_SUM_LIABILITIES',
+      payload: sum,
+    };
+  };
+
 
   return (
     <div>
@@ -110,4 +126,7 @@ function Liabilities() {
   );
 }
 
+
 export default Liabilities;
+
+

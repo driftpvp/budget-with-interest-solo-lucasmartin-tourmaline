@@ -2,11 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
 router.get('/', (req, res) => {
-  // GET route code here
   console.log('/liabilities GET route');
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user', req.user);
@@ -23,11 +20,8 @@ router.get('/', (req, res) => {
   }
 });
 
-/**
- * POST route template
- */
+
 router.post('/', (req, res) => {
-  // POST route code here
   console.log('/liabilities POST route');
   console.log(req.body);
   console.log('is authenticated?', req.isAuthenticated());
@@ -47,7 +41,7 @@ router.post('/', (req, res) => {
   };
 });
 
-// DELETE route code here
+
 router.delete('/:id', (req, res) => {
   if(req.isAuthenticated()) {
       let id = req.params.id;
@@ -65,7 +59,7 @@ router.delete('/:id', (req, res) => {
   }
 });
 
-// PUT route code here
+
 router.put(`/toggle/:id`, (req, res) => {
   let { id } = req.params;
   const sqlText = `UPDATE "liabilities" SET "liabilities_required" = NOT "liabilities_required" WHERE "id" = $1;`;

@@ -12,7 +12,7 @@ const userRouter = require('./routes/user.router');
 const liabilitiesRouter = require('./routes/liabilities.router');
 const assetsRouter = require('./routes/assets.router');
 const favoritesRouter = require('./routes/favorites.router');
-const headerRouter = require('./routes/header.router')
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,7 +30,6 @@ app.use('/api/user', userRouter);
 app.use('/api/liabilities', liabilitiesRouter);
 app.use('/api/assets', assetsRouter);
 app.use('/api/favorites', favoritesRouter);
-app.use('/api/assets', headerRouter);
 
 // Serve static files
 app.use(express.static('build'));

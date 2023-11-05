@@ -4,18 +4,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import './Assets.css';
 
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function Assets() {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  // const dispatch = useDispatch;
-  // const assetsList = useSelector((store) => store.assetsList)
-  const store = useSelector((store) => store);
-  // const [assets_name, setAssetsName] = useState('');
-
-  const [assetsList, setAssetsList] = useState([]);
+  const dispatch = useDispatch();
+  const assetsList = useSelector((store) => store.assets.assetsList);
   const [assetsName, setAssetsName] = useState ('');
   const [assetsNote, setAssetsNote] = useState ('');
   const [assetsValue, setAssetsValue] = useState (0);
@@ -26,18 +17,11 @@ function Assets() {
     getAssetsList();
   }, []);
 
-  // const getAssetsList = () => {
-  //   dispatch({ type: 'FETCH_ASSETS_LIST' })
-  // };
 
   const getAssetsList = () => {
-    axios.get('/api/assets').then((response) => {
-        setAssetsList(response.data);
-    }).catch((error) => {
-        console.log(error);
-        alert('Something went wrong with Assets GET');
-    });
-  }
+    dispatch({ type: 'FETCH_ASSETS' })
+  };
+
 
   const addAsset = (event) => {
     event.preventDefault();
@@ -54,13 +38,14 @@ function Assets() {
         // Reset input fields
         setAssetsName('');
         setAssetsNote('');
-        setAssetsValue('');
+        setAssetsValue(0);
       })
       .catch(error => {
         console.log(error);
         alert('Something went wrong with Assets POST');
       });
   }
+
 
   const deleteAssets = (assetId) => {
     axios.delete(`/api/assets/${assetId}`)
@@ -73,27 +58,41 @@ function Assets() {
     });
   }
 
+
   const sumAssets = () => {
     let total = 0;
     for(let i = 0; i < assetsList.length; i +=1) {
       total += Number(assetsList[i].assets_value);
     }
+    dispatch(updateSumAssets(total));
+
     return total;
   }
+
+  const updateSumAssets = (sum) => {
+    return {
+      type: 'UPDATE_SUM_ASSETS',
+      payload: sum,
+    };
+  };
+
 
   return (
     <div>
       <h2>Welcome to Assets</h2>
       <div>
-        {
-          assetsList.map(assets => (
-            <div key={assets.id} style={{padding: '10px', margin: '10px', borderRadius: '10px', boarder: '2px solid gray' }}>
+        {assetsList.map(assets => (
+          <div key={assets.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
               <h4>{assets.assets_name} per month ${assets.assets_value}</h4>
               <p> {assets.assets_note} </p>
               <button onClick={() => deleteAssets(assets.id)} style={{ cursor: "pointer" }}>Delete</button>
-            </div>
-          ))
-        }
+          </div>
+        ))}
+      </div>
+      <br></br>
+      <br></br>
+      <div>
+      <h2>Monthly Total: ${sumAssets()}</h2>
       </div>
       <br></br>
       <br></br>
@@ -106,11 +105,9 @@ function Assets() {
         <h6>* is required field</h6>
         <button>Submit</button>
       </form>
-      <br />
-      <br />
-      <h2>Monthly Total: ${sumAssets()}</h2>
     </div>
   );
 }
+
 
 export default Assets;

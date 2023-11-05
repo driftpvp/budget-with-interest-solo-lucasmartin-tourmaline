@@ -29,7 +29,7 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <div>
-        <p>The average "ROI" Return on Investment in the stock market 
+        <p>The average Return on Investment or ROI in the stock market 
            over the last century is about 10%. How much would that purchase
            be worth if you invested it instead?
         </p>
