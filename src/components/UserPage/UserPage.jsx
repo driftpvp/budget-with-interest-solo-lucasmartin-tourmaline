@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import { borders } from '@mui/system';
+import './UserPage.css';
+
+
 function UserPage() {
   const user = useSelector((store) => store.user);
   const [purchasePrice, setPurchasePrice] = useState(''); // State to store the input value
@@ -46,6 +50,22 @@ function UserPage() {
           <p>Future Value After Ten Years: ${futureValue.toFixed(2)}</p>
         )}
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

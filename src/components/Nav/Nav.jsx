@@ -13,9 +13,7 @@ function Nav() {
       <Link to="/home">
         <h2 className="nav-title"></h2>
       </Link>
-      <div>
-      <Footer />
-      </div>
+      
       <div>
         
         {/* If no user is logged in, show these links */}
