@@ -1,16 +1,24 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 import './Header.css';
-import Assets from '../Assets/Assets';
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
 
 function Header() {
-  return <header className="header">
-            <h1 className="header-title">Budget With Interest!  {}</h1>
-         </header>;
+  const sumAssets = useSelector((state) => state.assets.assetsSum.sumAssets);
+  const sumLiabilities = useSelector((state) => state.liabilities.liabilitiesSum.sumLiabilities);
+  const balanceDifference = sumAssets - sumLiabilities;
+
+
+  return (
+    <header className="header">
+      <h1 className="header-title">Budget with Interest!</h1>
+      <div className="balance-container" style={{ textAlign: 'center' }}>
+        <h1>Total Balance: ${balanceDifference}</h1>
+      </div>
+    </header>
+  );
 }
 
+
 export default Header;
+
+

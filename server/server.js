@@ -13,6 +13,7 @@ const liabilitiesRouter = require('./routes/liabilities.router');
 const assetsRouter = require('./routes/assets.router');
 const favoritesRouter = require('./routes/favorites.router');
 
+
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

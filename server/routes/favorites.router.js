@@ -2,11 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
 router.get('/', (req, res) => {
-  // GET route code here
   console.log('/favorites GET route');
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user', req.user);
@@ -23,11 +20,8 @@ router.get('/', (req, res) => {
   }
 });
 
-/**
- * POST route template
- */
+
 router.post('/', (req, res) => {
-  // POST route code here
   console.log('/favorites POST route');
   console.log(req.body);
   console.log('is authenticated?', req.isAuthenticated());
@@ -53,7 +47,6 @@ router.put('/edit/:id', (req, res) => {
     console.log('user', req.user);
     let queryText = `UPDATE "favorites" SET "favorites_value" = ${favoritesValue} WHERE "user_id" = $1;`;
     pool.query(sqlText, [favorites_value])
-    // pool.query(queryText, [req.body.favorites_value])
     .then(result => {
         res.sendStatus(201);
     })
@@ -66,7 +59,7 @@ router.put('/edit/:id', (req, res) => {
   };
 });
 
-// DELETE route code here
+
 router.delete('/:id', (req, res) => {
     if(req.isAuthenticated()) {
         let id = req.params.id;
@@ -84,23 +77,5 @@ router.delete('/:id', (req, res) => {
     }
 });
 
-// router.put('/toggle/:id', (req, res) => {
-//   let { id } = req.params
-//   if(req.isAuthenticated()) {
-//     console.log('user', req.user);
-//     const sqlText = `UPDATE "favorites" SET "favorites_value" = ${favoritesValue} WHERE "user_id" = $1;`;
-//     pool.query(sqlText, [id])
-//     // pool.query(queryText, [req.body.favorites_value])
-//     .then(result => {
-//         res.sendStatus(201);
-//     })
-//     .catch(error => {
-//         console.log(error);
-//         res.sendStatus(500)
-//     })
-//   } else {
-//     res.sendStatus(401);
-//   };
-// });
 
 module.exports = router;

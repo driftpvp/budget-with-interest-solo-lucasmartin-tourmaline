@@ -21,6 +21,8 @@ function* getLiabilitiesList() {
 
 //DELETE
 
+
+
 function* liabilitiesSaga() {
     yield takeLatest('FETCH_LIABILITIES', getLiabilitiesList);
 }
