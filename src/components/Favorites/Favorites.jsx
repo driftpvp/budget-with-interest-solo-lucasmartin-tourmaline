@@ -64,12 +64,13 @@ function Favorites() {
 
 
   return (
-    <div>
-      <h2>Welcome to Favorites</h2>
+    <div className='container'>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Welcome to Favorites</h2>
       <div>
         {
           favoritesList.map(favorites => (
-            <div key={favorites.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+            <div className='entry' key={favorites.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
               <h4>{favorites.favorites_name}  ${favorites.favorites_value}
               </h4>
               <p> {favorites.favorites_note} </p>
@@ -80,8 +81,9 @@ function Favorites() {
       </div>
       <br></br>
       <br></br>
-      <h2>New Entry</h2>
-      <form onSubmit={addFavorites}>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        New Entry</h2>
+      <form className='form' onSubmit={addFavorites} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={favoritesName} onChange={e => setFavoritesName(e.target.value)} />
         Note: <input type="text" value={favoritesNote} onChange={e => setFavoritesNote(e.target.value)} />
         *Value: $<input type="text" placeholder="*" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />

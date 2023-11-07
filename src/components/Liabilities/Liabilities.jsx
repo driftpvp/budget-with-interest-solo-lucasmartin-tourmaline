@@ -92,11 +92,12 @@ function Liabilities() {
 
 
   return (
-    <div>
-      <h2>Welcome to Liabilities</h2>
+    <div className='container'>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Welcome to Liabilities</h2>
       <div>
         {liabilitiesList.map(liabilities => (
-          <div key={liabilities.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+          <div className='entry' key={liabilities.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
             <h4>{liabilities.liabilities_name} per month ${liabilities.liabilities_value} {liabilities.liabilities_required ? 'required' : 'discretionary'}</h4>
             <p> {liabilities.liabilities_note}</p>
             <button onClick={() => deleteLiabilities(liabilities.id)} style={{ cursor: "pointer" }}>Delete</button>
@@ -108,12 +109,14 @@ function Liabilities() {
       <br></br>
       <br></br>
       <div>
-        <h2>Monthly Total: ${sumLiabilities()}</h2>
+        <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+          Monthly Total: ${sumLiabilities()}</h2>
       </div>
       <br></br>
       <br></br>
-      <h2>New Entry</h2>
-      <form onSubmit={addLiabilities}>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        New Entry</h2>
+      <form className='form' onSubmit={addLiabilities} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={liabilitiesName} onChange={e => setLiabilitiesName(e.target.value)} />
         Note: <input type="text" value={liabilitiesNote} onChange={e => setLiabilitiesNote(e.target.value)} />
         *Value: $<input type="text" placeholder="*" value={liabilitiesValue} onChange={e => setLiabilitiesValue(e.target.value)} />

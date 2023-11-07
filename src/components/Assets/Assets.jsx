@@ -83,7 +83,8 @@ function Assets() {
 
   return (
     <div className='container'>
-      <h2 className='title'>Welcome to Assets</h2>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Welcome to Assets</h2>
       <div>
         {assetsList.map(assets => (
           <div className='entry' key={assets.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
@@ -96,12 +97,14 @@ function Assets() {
       <br></br>
       <br></br>
       <div>
-      <h2 className='title'>Monthly Total: ${sumAssets()}</h2>
+      <h2 className='title'style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Monthly Total: ${sumAssets()}</h2>
       </div>
       <br></br>
       <br></br>
-      <h2 className='title'>New Entry</h2>
-      <form className='form' onSubmit={addAsset}>
+      <h2 className='title'style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        New Entry</h2>
+      <form className='form' onSubmit={addAsset} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={assetsName} onChange={e => setAssetsName(e.target.value)} />
         Note: <input type="text" value={assetsNote} onChange={e => setAssetsNote(e.target.value)} />
         *Value: $<input type="text" placeholder="*" value={assetsValue} onChange={e => setAssetsValue(e.target.value)} />

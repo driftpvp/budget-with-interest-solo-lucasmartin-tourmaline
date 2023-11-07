@@ -1,9 +1,10 @@
 import React from 'react';
-
+import './AboutPage.css'
 
 function AboutPage() {
   return (
     <div className="container">
+      <div className="list" style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
       <h3>--Created With--</h3>
       <ul className='tech used'>
         <p>Heroku</p>
@@ -13,8 +14,9 @@ function AboutPage() {
         <p>Passport</p>
         <p>PostgreSQL</p>
         <p>Postico</p>
-        <p>Images provided by: Rawpixel.com</p>
+        <p>Background images provided by: Rawpixel.com</p>
       </ul>
+      </div>
       <br></br>
       <br></br>
       <br></br>
