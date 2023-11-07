@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { borders } from '@mui/system';
+import Button from '@mui/material/Button';
+import { Card, CardActions, CardContent, Typography } from '@mui/material';
+
 import './UserPage.css';
+
 
 
 function UserPage() {
@@ -31,35 +34,41 @@ function UserPage() {
 
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <div>
-        <p>The average Return on Investment or ROI in the stock market 
-           over the last century is about 10%. How much would that purchase
-           be worth if you invested it instead?
-        </p>
-        <form onSubmit={interestCalculator}>
-          Purchase Price: $<input
-            type="text"
-            value={purchasePrice}
-            onChange={(e) => setPurchasePrice(e.target.value)}
-          />
-          <br />
-          <button type="submit">Calculate</button>
-        </form>
-        {futureValue !== null && (
-          <p>Future Value After Ten Years: ${futureValue.toFixed(2)}</p>
-        )}
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+        <Card sx={{ minWidth: 275, maxWidth:600}} variant='outlined' style={{backgroundColor: "#B3CABD"}}>
+        <CardContent>
+          <Typography>
+           Welcome, {user.username}!
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography>
+            The average Return on Investment or ROI in the stock market 
+            over the last century is about 10%. How much would that purchase
+            be worth if you invested it instead?
+          </Typography>
+        </CardContent>
+        </Card>
+        <br />
+        <Card sx={{ minWidth: 275, maxWidth:400}} variant='outlined' style={{backgroundColor: "#B3CABD"}}>
+        <CardActions>
+          <form onSubmit={interestCalculator}>
+            Purchase Price: $<input
+              type="text"
+              value={purchasePrice}
+              onChange={(e) => setPurchasePrice(e.target.value)}
+            />
+            <br />
+            <Button variant="contained" 
+                    type="submit"
+                    color="success">
+                    Calculate
+            </Button >
+          </form>
+          {futureValue !== null && (
+            <Typography>Future Value After Ten Years: ${futureValue.toFixed(2)}</Typography>
+          )}
+        </CardActions>
+      </Card>
       <br />
       <br />
       <br />

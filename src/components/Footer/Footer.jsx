@@ -3,7 +3,7 @@ import './Footer.css';
 
 
 function Footer() {
-  return <footer>&copy; 2023 LDKC Martin</footer>;
+  return <footer className='footer-title'>&copy; 2023 LDKC Martin</footer>;
 }
 
 

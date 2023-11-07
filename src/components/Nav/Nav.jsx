@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
-import Footer from '../Footer/Footer';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);

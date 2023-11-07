@@ -12,7 +12,7 @@ function Header() {
     <header className="header">
       <h1 className="header-title">Budget with Interest!</h1>
       <div className="balance-container" style={{ textAlign: 'center' }}>
-        <h1>Total Balance: ${balanceDifference}</h1>
+        <h1 className='balance'>Total Balance: ${balanceDifference}</h1>
       </div>
     </header>
   );
