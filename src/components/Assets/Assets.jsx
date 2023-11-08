@@ -3,7 +3,8 @@ import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 
 import Button from '@mui/material/Button';
-import { Card, CardActions, CardContent, Typography, Grid } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Card, CardActions, CardContent, Typography, Grid, IconButton } from '@mui/material';
 
 import './Assets.css';
 
@@ -88,9 +89,12 @@ function Assets() {
       <div>
         {assetsList.map(assets => (
           <div className='entry' key={assets.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
-              <h4>{assets.assets_name} per month ${assets.assets_value}</h4>
+              <h3>{assets.assets_name} per month ${assets.assets_value}</h3>
               <p> {assets.assets_note} </p>
-              <button onClick={() => deleteAssets(assets.id)} style={{ cursor: "pointer" }}>Delete</button>
+              <IconButton onClick={() => deleteAssets(assets.id)} style={{ cursor: "pointer" }} aria-label='Delete'>
+                <DeleteIcon />
+              </IconButton>
+
           </div>
         ))}
       </div>
@@ -103,14 +107,14 @@ function Assets() {
       <br></br>
       <br></br>
       <h2 className='title'style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
-        New Entry</h2>
+        New Asset</h2>
       <form className='form' onSubmit={addAsset} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={assetsName} onChange={e => setAssetsName(e.target.value)} />
         Note: <input type="text" value={assetsNote} onChange={e => setAssetsNote(e.target.value)} />
         *Value: $<input type="text" placeholder="*" value={assetsValue} onChange={e => setAssetsValue(e.target.value)} />
         <br />
         <h6>* is required field</h6>
-        <button>Submit</button>
+        <Button variant="contained" type="submit" color="success">Create</Button >
       </form>
     </div>
   );

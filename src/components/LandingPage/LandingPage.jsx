@@ -21,7 +21,7 @@ function LandingPage() {
     <div className="container">
       <Card sx={{ minWidth: 100, maxWidth: 300}} variant='outlined' style={{backgroundColor: "#B3CABD"}}>
         <CardContent>
-          <Typography>
+          <Typography sx={{fontSize: 30}}>
             {heading}
           </Typography>
         </CardContent>
@@ -32,7 +32,7 @@ function LandingPage() {
         <div className="grid-col grid-col_8">
           <Card style={{backgroundColor: "#B3CABD"}}>
             <CardContent>
-              <Typography>
+              <Typography sx={{fontSize: 20}}>
                 Welcome to Budget with Interest. Budgeting isn't what most would consider
                 fun. This application asks the questions: "Why are we budgeting?" and "How 
                 can we keep motivated?" We believe the best answer is "Seeing our wealth grow"
@@ -48,7 +48,9 @@ function LandingPage() {
           <RegisterForm />
 
           <center>
-            <h4 className='member'>Already a Member?</h4>
+            <h4 className='member' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+              Already a Member?
+            </h4>
             <button className="btn btn_sizeSm" onClick={onLogin}>
               Login
             </button>

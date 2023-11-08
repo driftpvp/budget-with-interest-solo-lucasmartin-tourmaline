@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './Liabilities.css';
 import axios from 'axios';
+
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import { Card, CardActions, CardContent, Typography, Grid, IconButton } from '@mui/material';
+
+import './Liabilities.css';
+
 
 function Liabilities() {
   const dispatch = useDispatch();
@@ -98,11 +106,13 @@ function Liabilities() {
       <div>
         {liabilitiesList.map(liabilities => (
           <div className='entry' key={liabilities.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
-            <h4>{liabilities.liabilities_name} per month ${liabilities.liabilities_value} {liabilities.liabilities_required ? 'required' : 'discretionary'}</h4>
+            <h3>{liabilities.liabilities_name} per month ${liabilities.liabilities_value} {liabilities.liabilities_required ? 'required' : 'discretionary'}</h3>
             <p> {liabilities.liabilities_note}</p>
-            <button onClick={() => deleteLiabilities(liabilities.id)} style={{ cursor: "pointer" }}>Delete</button>
+            <IconButton onClick={() => deleteLiabilities(liabilities.id)} style={{ cursor: "pointer" }}>
+              <DeleteIcon />
+            </IconButton>
+            <Button onClick={() => toggleLiabilities(liabilities.id)}>Required</Button>
             {JSON.stringify(liabilities.liabilities_required)}
-            <button onClick={() => toggleLiabilities(liabilities.id)}>Required</button>
           </div>
         ))}
       </div>
@@ -115,7 +125,7 @@ function Liabilities() {
       <br></br>
       <br></br>
       <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
-        New Entry</h2>
+        New Liability</h2>
       <form className='form' onSubmit={addLiabilities} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={liabilitiesName} onChange={e => setLiabilitiesName(e.target.value)} />
         Note: <input type="text" value={liabilitiesNote} onChange={e => setLiabilitiesNote(e.target.value)} />
@@ -123,7 +133,7 @@ function Liabilities() {
         Required: <input type="text" value={liabilitiesRequired} onChange={e => setLiabilitiesRequired(e.target.value)} />
         <br />
         <h6>* is a required field</h6>
-        <button>Submit</button>
+        <Button variant="contained" type="submit" color="success">Create</Button >
       </form>
     </div>
   );

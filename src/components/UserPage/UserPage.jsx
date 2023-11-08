@@ -36,12 +36,12 @@ function UserPage() {
     <div className="container">
         <Card sx={{ minWidth: 275, maxWidth:600}} variant='outlined' style={{backgroundColor: "#B3CABD"}}>
         <CardContent>
-          <Typography>
+          <Typography sx={{fontSize: 30}}>
            Welcome, {user.username}!
           </Typography>
         </CardContent>
         <CardContent>
-          <Typography>
+          <Typography  sx={{fontSize: 24}}>
             The average Return on Investment or ROI in the stock market 
             over the last century is about 10%. How much would that purchase
             be worth if you invested it instead?
