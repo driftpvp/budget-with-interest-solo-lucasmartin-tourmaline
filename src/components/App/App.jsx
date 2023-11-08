@@ -8,6 +8,8 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import '@fontsource/roboto';
+
 import Nav from '../Nav/Nav';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -22,6 +24,7 @@ import Header from '../Header/Header';
 import Assets from '../Assets/Assets';
 import Liabilities from '../Liabilities/Liabilities';
 import Favorites from '../Favorites/Favorites';
+import Footer from '../Footer/Footer';
 
 import './App.css';
 
@@ -142,7 +145,9 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        <Footer />
         <Nav />
+        
       </div>
     </Router>
   );

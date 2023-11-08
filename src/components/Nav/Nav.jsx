@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
-import Footer from '../Footer/Footer';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -13,9 +13,7 @@ function Nav() {
       <Link to="/home">
         <h2 className="nav-title"></h2>
       </Link>
-      <div>
-      <Footer />
-      </div>
+      
       <div>
         
         {/* If no user is logged in, show these links */}

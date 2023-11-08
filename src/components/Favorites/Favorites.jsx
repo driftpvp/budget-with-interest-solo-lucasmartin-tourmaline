@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
+
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Card, CardActions, CardContent, Typography, Grid, IconButton } from '@mui/material';
+
 import './Favorites.css';
 
 
@@ -64,30 +69,34 @@ function Favorites() {
 
 
   return (
-    <div>
-      <h2>Welcome to Favorites</h2>
+    <div className='container'>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Welcome to Favorites</h2>
       <div>
         {
           favoritesList.map(favorites => (
-            <div key={favorites.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
-              <h4>{favorites.favorites_name}  ${favorites.favorites_value}
-              </h4>
+            <div className='entry' key={favorites.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+              <h3>{favorites.favorites_name}  ${favorites.favorites_value}
+              </h3>
               <p> {favorites.favorites_note} </p>
-              <button onClick={() => deleteFavorites(favorites.id)} style={{ cursor: "pointer" }}>Delete</button>
+              <IconButton onClick={() => deleteFavorites(favorites.id)} style={{ cursor: "pointer" }} aria-label='Delete'>
+                <DeleteIcon />
+              </IconButton>
             </div>
           ))
         }
       </div>
       <br></br>
       <br></br>
-      <h2>New Entry</h2>
-      <form onSubmit={addFavorites}>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        New Favorite</h2>
+      <form className='form' onSubmit={addFavorites} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={favoritesName} onChange={e => setFavoritesName(e.target.value)} />
         Note: <input type="text" value={favoritesNote} onChange={e => setFavoritesNote(e.target.value)} />
         *Value: $<input type="text" placeholder="*" value={favoritesValue} onChange={e => setFavoritesValue(e.target.value)} />
         <br />
         <h6>* is required field</h6>
-        <button>Submit</button>
+        <Button variant="contained" type="submit" color="success">Create</Button >
    
       </form>
       <br />

@@ -22,6 +22,18 @@ Container
   padding: 20px;
 }
 
+.nav {
+  /* flex box layout */
+  display: flex;
+  
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 30px;
+  background-color: #B3CABD;;
+  overflow: hidden;
+}
+
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */

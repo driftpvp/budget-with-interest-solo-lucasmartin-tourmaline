@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
+
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Card, CardActions, CardContent, Typography, Grid, IconButton } from '@mui/material';
+
 import './Assets.css';
 
 
@@ -78,32 +83,38 @@ function Assets() {
 
 
   return (
-    <div>
-      <h2>Welcome to Assets</h2>
+    <div className='container'>
+      <h2 className='title' style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Welcome to Assets</h2>
       <div>
         {assetsList.map(assets => (
-          <div key={assets.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
-              <h4>{assets.assets_name} per month ${assets.assets_value}</h4>
+          <div className='entry' key={assets.id} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+              <h3>{assets.assets_name} per month ${assets.assets_value}</h3>
               <p> {assets.assets_note} </p>
-              <button onClick={() => deleteAssets(assets.id)} style={{ cursor: "pointer" }}>Delete</button>
+              <IconButton onClick={() => deleteAssets(assets.id)} style={{ cursor: "pointer" }} aria-label='Delete'>
+                <DeleteIcon />
+              </IconButton>
+
           </div>
         ))}
       </div>
       <br></br>
       <br></br>
       <div>
-      <h2>Monthly Total: ${sumAssets()}</h2>
+      <h2 className='title'style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        Monthly Total: ${sumAssets()}</h2>
       </div>
       <br></br>
       <br></br>
-      <h2>New Entry</h2>
-      <form onSubmit={addAsset}>
+      <h2 className='title'style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
+        New Asset</h2>
+      <form className='form' onSubmit={addAsset} style={{ padding: '10px', margin: '10px', borderRadius: '10px', border: '2px solid gray' }}>
         *Name: <input type="text" placeholder="*" value={assetsName} onChange={e => setAssetsName(e.target.value)} />
         Note: <input type="text" value={assetsNote} onChange={e => setAssetsNote(e.target.value)} />
         *Value: $<input type="text" placeholder="*" value={assetsValue} onChange={e => setAssetsValue(e.target.value)} />
         <br />
         <h6>* is required field</h6>
-        <button>Submit</button>
+        <Button variant="contained" type="submit" color="success">Create</Button >
       </form>
     </div>
   );
